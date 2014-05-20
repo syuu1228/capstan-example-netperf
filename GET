@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -e
+
+VERSION=2.6.0
+
+mkdir upstream
+cd upstream
+wget ftp://ftp.netperf.org/netperf/netperf-$VERSION.tar.bz2
+tar jxf netperf-$VERSION.tar.bz2
+cd netperf-$VERSION
+
+./configure
+
+make CFLAGS="-fPIC -shared"
+cp src/netserver ../../netserver.so
